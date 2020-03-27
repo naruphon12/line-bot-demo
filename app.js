@@ -6,7 +6,7 @@ const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         let msg = req.body.events[0].message.text
         reply(reply_token, msg)
@@ -24,7 +24,7 @@ function reply(reply_token, msg) {
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
     }
     let body
-    if (msg="สวัสดี"){
+    if (msg ==='สวัสดี'){
          body = JSON.stringify({
             replyToken: reply_token,
             messages: [{
