@@ -6,11 +6,12 @@ const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 let msg
+
 app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
-        reply(reply_token, msg)
+        reply(req.body, msg)
         
     }else{
         let reply_token = req.body.events[0].replyToken
@@ -20,7 +21,7 @@ app.post('/webhook', (req, res) => {
  res.sendStatus(200)
 })
 app.listen(port)
-function reply(reply_token, msg) {
+function reply(bodyResponse, msg) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
@@ -28,7 +29,7 @@ function reply(reply_token, msg) {
     let body
     if (msg ==='สวัสดี'){
          body = JSON.stringify({
-            replyToken: reply_token,
+            replyToken: bodyResponse.events[0].replyToken,
             messages: [{
                 type: 'text',
                 text: 'สวัสดีครับ'
@@ -36,7 +37,7 @@ function reply(reply_token, msg) {
         })
     }else{
          body = JSON.stringify({
-            replyToken: reply_token,
+            replyToken: bodyResponse.events[0].replyToken,
             messages: [{
                 type: 'text',
                 text: JSON.stringify(bodyResponse)
