@@ -9,8 +9,7 @@ let msg
 
 app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
-        let reply_token = req.body.events[0].replyToken
-         msg = req.body.events[0].message.text
+        msg = req.body.events[0].message.text
         reply(req.body, msg)
         
     }else{
@@ -37,7 +36,7 @@ function reply(bodyResponse, msg) {
         })
     }else{
          body = JSON.stringify({
-            replyToken: bodyResponse.events[0].replyToken,
+            to: `U88076f4dc7fdbf8ce086f562509b64ec`,
             messages: [{
                 type: 'text',
                 text: JSON.stringify(bodyResponse)
@@ -46,7 +45,7 @@ function reply(bodyResponse, msg) {
     }
    
     request.post({
-        url: 'https://api.line.me/v2/bot/message/reply',
+        url: 'https://api.line.me/v2/bot/message/push',
         headers: headers,
         body: body
     }, (err, res, body) => {
