@@ -23,13 +23,25 @@ function reply(reply_token, msg) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
     }
-    let body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [{
-            type: 'text',
-            text: msg
-        }]
-    })
+    let body
+    if (msg="สวัสดี"){
+         body = JSON.stringify({
+            replyToken: reply_token,
+            messages: [{
+                type: 'text',
+                text: 'สวัสดีครับ'
+            }]
+        })
+    }else{
+         body = JSON.stringify({
+            replyToken: reply_token,
+            messages: [{
+                type: 'text',
+                text: 'ไม่เข้าใจ'
+            }]
+        })
+    }
+   
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
         headers: headers,
