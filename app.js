@@ -5,14 +5,16 @@ const app = express()
 const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+let msg
 app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
-        let msg = req.body.events[0].message.text
+         msg = req.body.events[0].message.text
         reply(reply_token, msg)
+        
     }else{
         let reply_token = req.body.events[0].replyToken
-        let msg = req.body.events[0].message.text
+         msg = req.body.events[0].message.text
         reply1(reply_token)
     }
  res.sendStatus(200)
@@ -37,7 +39,7 @@ function reply(reply_token, msg) {
             replyToken: reply_token,
             messages: [{
                 type: 'text',
-                text: 'ไม่เข้าใจ'
+                text: JSON.stringify(bodyResponse)
             }]
         })
     }
