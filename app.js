@@ -11,12 +11,14 @@ app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-        reply2(reply_token)
+        //reply2(reply_token)
+        reply(req.body, msg,reply_token)
         
     }else{
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
          reply(req.body, msg,reply_token)
+        //reply2(reply_token)
     }
  res.sendStatus(200)
 })
