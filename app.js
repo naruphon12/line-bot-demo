@@ -42,7 +42,7 @@ function reply(bodyResponse, msg,reply_token) {
                    text: 'สวัสดีครับ'
                }]
            })
-       }else if (msg ='test'){
+       }else{
             body = JSON.stringify({
                to: bodyResponse.events[0].source.userId,
                messages: [{
