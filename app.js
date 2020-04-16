@@ -12,11 +12,8 @@ app.post('/webhook', (req, res) => {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
         //reply2(reply_token)
-        if (msg ='สวัสดี'){
-            reply(req.body, msg,reply_token)
-        }else{
-            reply2(reply_token)
-        }
+          reply(req.body, msg,reply_token)
+        
 
          
         
@@ -121,3 +118,4 @@ request(options, function (error, response, body) {
 });
 
 }
+
