@@ -12,13 +12,19 @@ app.post('/webhook', (req, res) => {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
         //reply2(reply_token)
-        reply(req.body, msg,reply_token)
+        if (msg ==='สวัสดี'){
+            reply(req.body, msg,reply_token)
+        }else{
+            reply2(reply_token)
+        }
+
+         
         
     }else{
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
-         reply(req.body, msg,reply_token)
-        //reply2(reply_token)
+         //reply(req.body, msg,reply_token)
+         reply2(reply_token)
     }
  res.sendStatus(200)
 })
@@ -39,7 +45,7 @@ function reply(bodyResponse, msg,reply_token) {
                    text: 'สวัสดีครับ'
                }]
            })
-       }else{
+       }else if (msg ==='test'){
             body = JSON.stringify({
                to: bodyResponse.events[0].source.userId,
                messages: [{
@@ -50,8 +56,21 @@ function reply(bodyResponse, msg,reply_token) {
        }
     }else if (type ==='image'){
 
+        body = JSON.stringify({
+            to: bodyResponse.events[0].source.userId,
+            messages: [{
+                type: 'text',
+                text: 'รูปภาพ'
+            }]
+        })
     }else if (type ==='location'){
-
+        body = JSON.stringify({
+            to: bodyResponse.events[0].source.userId,
+            messages: [{
+                type: 'text',
+                text: 'location'
+            }]
+        })
     }
    
    
