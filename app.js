@@ -31,12 +31,12 @@ function reply(bodyResponse, msg,reply_token) {
     let body
     let type =bodyResponse.events[0].message.type
     if (type ==='text'){
-        if (msg ==='สวัสดี'){
+        if (msg.text ==='สวัสดี'){
             body = JSON.stringify({
                replyToken: reply_token,
                messages: [{
                    type: 'text',
-                   text: 'สวัสดีครับ'
+                   text: msg
                }]
            })
        }else{
