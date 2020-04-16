@@ -8,15 +8,12 @@ app.use(bodyParser.json())
 let msg
 
 app.post('/webhook', (req, res) => {
-    if (req.method = 'POST') {
+    if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
         //reply2(reply_token)
           reply(req.body, msg,reply_token)
-        
 
-         
-        
     }else{
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
@@ -33,8 +30,8 @@ function reply(bodyResponse, msg,reply_token) {
     }
     let body
     let type =bodyResponse.events[0].message.type
-    if (type ='text'){
-        if (msg ='สวัสดี'){
+    if (type ==='text'){
+        if (msg ==='สวัสดี'){
             body = JSON.stringify({
                replyToken: reply_token,
                messages: [{
@@ -51,7 +48,7 @@ function reply(bodyResponse, msg,reply_token) {
                }]
            })
        }
-    }else if (type ='image'){
+    }else if (type ==='image'){
 
         body = JSON.stringify({
             to: bodyResponse.events[0].source.userId,
@@ -60,7 +57,7 @@ function reply(bodyResponse, msg,reply_token) {
                 text: 'รูปภาพ'
             }]
         })
-    }else if (type ='location'){
+    }else if (type ==='location'){
         body = JSON.stringify({
             to: bodyResponse.events[0].source.userId,
             messages: [{
