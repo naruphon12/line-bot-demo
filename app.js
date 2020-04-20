@@ -96,30 +96,34 @@ function reply1(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
-function reply2(reply_token) {
 
-     var options = {
-      method: 'POST',
-      url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
-      headers:
-      {
-        soapaction: 'http://tempuri.org/registerline',
-        host: 'vm-feeduat',
-        'content-type': 'text/xml; charset=utf-8'
-      },
-      body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
-    };
-    request(options, function (error, response, cb) {
-      if (error) throw new Error(error);
-  
-       console.log(cb);
-    });
-  
-  
-  module.exports = {
+function reply2() {
 
-  }
-
-
-}
+    const getTestSoap = async () => {
+ 
+        var options = {
+          method: 'POST',
+          url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
+          headers:
+          {
+            soapaction: 'http://tempuri.org/registerline',
+            host: 'vm-feeduat',
+            'content-type': 'text/xml; charset=utf-8'
+          },
+          body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+        };
+        request(options, function (error, response, cb) {
+          if (error) throw new Error(error);
+      
+           console.log(cb);
+        });
+        console.log(cb);
+      }
+      console.log(cb);
+      module.exports = {
+        
+        getTestSoap
+      
+      }
+    }
 
