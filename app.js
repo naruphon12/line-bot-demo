@@ -97,7 +97,7 @@ function reply1(reply_token) {
     });
 }
 
-function reply2() {
+function reply2(reply_token) {
 
     const getTestSoap = async () => {
  
