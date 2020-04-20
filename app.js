@@ -119,11 +119,10 @@ function reply2(reply_token) {
         });
         console.log(cb);
       }
-      console.log(cb);
+      
       module.exports = {
         
         getTestSoap
       
       }
     }
-
