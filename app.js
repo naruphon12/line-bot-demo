@@ -107,7 +107,7 @@ function reply2(reply_token) {
           headers:
           {
             soapaction: 'http://tempuri.org/ProductionPlan',
-            host: 'vm-feeduat',
+            host: 'feedkbf.cpf.co.th',
             'content-type': 'text/xml; charset=utf-8'
           },
           //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
