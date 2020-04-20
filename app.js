@@ -11,14 +11,14 @@ app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-        reply2(reply_token)
+        reply2()
        //reply2(req.body, msg,reply_token)
 
     }else{
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
          //reply(req.body, msg,reply_token)
-         reply2(reply_token)
+         reply2()
     }
  res.sendStatus(200)
 })
@@ -96,7 +96,7 @@ function reply1(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
-function reply2(reply_token) {
+function reply2() {
   
     const getTestSoap = async () => {
  
@@ -121,7 +121,7 @@ function reply2(reply_token) {
       
       module.exports = {
       
-        getTestSoap
+        
       
       }
     }
