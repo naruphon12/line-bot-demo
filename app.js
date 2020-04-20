@@ -12,13 +12,13 @@ app.post('/webhook', (req, res) => {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
         //reply2(reply_token)
-          reply(req.body, msg,reply_token)
+          reply2(req.body, msg,reply_token)
 
     }else{
         let reply_token = req.body.events[0].replyToken
          msg = req.body.events[0].message.text
          //reply(req.body, msg,reply_token)
-         reply2(req.body)
+         reply2(req.body, msg,reply_token)
     }
  res.sendStatus(200)
 })
@@ -96,7 +96,7 @@ function reply1(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
-function reply2(bodyResponse) {
+function reply2(bodyResponse, msg,reply_token) {
   
 const getTestSoap = async () => {
  
@@ -109,7 +109,7 @@ const getTestSoap = async () => {
         host: 'vm-feeduat',
         'content-type': 'text/xml; charset=utf-8'
       },
-      body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/"><JsonStr>{"Data":[{"User_ID":"'+ bodyResponse.events[0].source.userId +'","Phone_No":"'+ 0882219724 +'","Email":"'+ bodyResponse.events[0].source.userId +'","Nameline":"'+ bodyResponse.events[0].source.userId +'"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+      body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
     };
     request(options, function (error, response, cb) {
       if (error) throw new Error(error);
@@ -118,6 +118,29 @@ const getTestSoap = async () => {
     });
   
   }
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
+}
+body = JSON.stringify({
+    to: bodyResponse.events[0].source.userId,
+    messages: [{
+        type: 'text',
+        text: JSON.stringify(bodyResponse)
+    }]
+})
+request.post({
+    url: 'https://api.line.me/v2/bot/message/push',
+    headers: headers,
+    body: body
+}, (err, res, body) => {
+    console.log('status = ' + res.statusCode);
+});
+  
   module.exports = {
-
+  
+    getTestSoap
+  
   }
+
+}
