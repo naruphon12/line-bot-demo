@@ -97,10 +97,8 @@ function reply1(reply_token) {
     });
 }
 function reply2(reply_token) {
-  //function getTestSoap() {
-const getTestSoap = async () => {
- 
-    var options = {
+
+     var options = {
       method: 'POST',
       url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
       headers:
@@ -117,9 +115,11 @@ const getTestSoap = async () => {
        console.log(cb);
     });
   
-  }
   
   module.exports = {
+
   }
 
+
 }
+
