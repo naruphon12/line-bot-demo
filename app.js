@@ -104,14 +104,49 @@ function reply2(bodyResponse) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
     }
-    body = JSON.stringify({
+    
+
+    const getTestSoap = async () => {
+ 
+        var options = {
+          method: 'POST',
+          url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
+          headers:
+          {
+            soapaction: 'http://tempuri.org/registerline',
+            host: 'vm-feeduat',
+            'content-type': 'text/xml; charset=utf-8'
+          },
+          body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+          //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ProductionPlan xmlns="http://tempuri.org/">    <JsonStr>{"Data" :[{"PlantCode":"301610","ProductionLine":"TEST22","PlanDate":"2019-01-31","PlanJob":"190001","RecipeIdent":"510","RecipeName":"510 CHICKEN","RecipeDate":"2019-01-18", "PlanWeight":"12000","TotalBatch":"3"}]}</JsonStr>   </ProductionPlan> </soap:Body></soap:Envelope>'
+       
+        };
+        text2='1'
+        request(options, function (error, response, cb) {
+          if (error) throw new Error(error);
+         
+           console.log(cb);
+           text2='2'+ text2
+        });
+        
+        console.log(cb);
+        text2='3'+ text2
+      }
+     
+      module.exports = {
+        
+        getTestSoap
+      
+      }
+      body = JSON.stringify({
         to: bodyResponse.events[0].source.userId,
         messages: [{
             type: 'text',
-            text: JSON.stringify(bodyResponse)
+            text: text2
         }]
     })
-    request.post({
+    
+      request.post({
         url: 'https://api.line.me/v2/bot/message/push',
         headers: headers,
         body: body
@@ -120,33 +155,4 @@ function reply2(bodyResponse) {
     });
 
 
-    const getTestSoap = async () => {
- 
-        var options = {
-          method: 'POST',
-          url: 'http://feedkbf.cpf.co.th/FeedWsKABIN/WebService.asmx',
-          headers:
-          {
-            soapaction: 'http://tempuri.org/ProductionPlan',
-            host: 'feedkbf.cpf.co.th',
-            'content-type': 'text/xml; charset=utf-8'
-          },
-          //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
-          body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ProductionPlan xmlns="http://tempuri.org/">    <JsonStr>{"Data" :[{"PlantCode":"301610","ProductionLine":"TEST22","PlanDate":"2019-01-31","PlanJob":"190001","RecipeIdent":"510","RecipeName":"510 CHICKEN","RecipeDate":"2019-01-18", "PlanWeight":"12000","TotalBatch":"3"}]}</JsonStr>   </ProductionPlan> </soap:Body></soap:Envelope>'
-       
-        };
-        request(options, function (error, response, cb) {
-          if (error) throw new Error(error);
-          text2="1"
-           console.log(cb);
-        });
-        text2="2"
-        console.log(cb);
-      }
-     
-      module.exports = {
-        
-        getTestSoap
-      
-      }
     }
