@@ -142,7 +142,7 @@ let num="1"
       num="7"
       send(bodyResponse.events[0].source.userId,num)
   }
-    function send(id)  {
+     function send(id,num)  {
 
         let headers = {
             'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ let num="1"
             to: id,
             messages: [{
                 type: 'text',
-                text: 'สวัสดี'
+                text: 'สวัสดี'+ num
             }]
         })
         
