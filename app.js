@@ -124,7 +124,7 @@ let num="1"
           if (error) throw new Error(error);
          
            console.log(cb);
-           num="4"+ cb
+           num="4"
            send(bodyResponse.events[0].source.userId,num)
         });
         
