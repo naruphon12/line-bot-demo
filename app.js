@@ -11,7 +11,35 @@ app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-        reply2(reply_token)
+          const getTestSoap = async () => {
+ 
+        var options = {
+          method: 'POST',
+          url: 'http://feedkbf.cpf.co.th/FeedWsKABIN/WebService.asmx',
+          headers:
+          {
+            soapaction: 'http://tempuri.org/ProductionPlan',
+            host: 'feedkbf.cpf.co.th',
+            'content-type': 'text/xml; charset=utf-8'
+          },
+          //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+          body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ProductionPlan xmlns="http://tempuri.org/">    <JsonStr>{"Data" :[{"PlantCode":"301610","ProductionLine":"TEST22","PlanDate":"2019-01-31","PlanJob":"190001","RecipeIdent":"510","RecipeName":"510 CHICKEN","RecipeDate":"2019-01-18", "PlanWeight":"12000","TotalBatch":"3"}]}</JsonStr>   </ProductionPlan> </soap:Body></soap:Envelope>'
+       
+        };
+        request(options, function (error, response, cb) {
+          if (error) throw new Error(error);
+      
+           console.log(cb);
+        });
+        console.log(cb);
+      }
+      
+      module.exports = {
+        
+        getTestSoap
+      
+      }
+        //reply2(reply_token)
         //reply(req.body, msg,reply_token)
 
     }else{
