@@ -100,7 +100,7 @@ function reply1(reply_token) {
 
 function reply2(bodyResponse) {
 
-    send(bodyResponse)
+    send(bodyResponse.events[0].source.userId)
     
     const getTestSoap = async () => {
  
@@ -138,17 +138,17 @@ function reply2(bodyResponse) {
 
 
     }
-    function send(bodyResponse)  {
+    function send(id)  {
 
         let headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
         }
         body = JSON.stringify({
-            to: bodyResponse.events[0].source.userId,
+            to: id,
             messages: [{
                 type: 'text',
-                text: text2
+                text: 'สวัสดี'
             }]
         })
         
