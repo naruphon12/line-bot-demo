@@ -103,7 +103,7 @@ function reply2(bodyResponse) {
     send(bodyResponse.events[0].source.userId)
     
     const getTestSoap = async () => {
- 
+        send(bodyResponse.events[0].source.userId)
         var options = {
           method: 'POST',
           url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
@@ -117,27 +117,25 @@ function reply2(bodyResponse) {
           //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ProductionPlan xmlns="http://tempuri.org/">    <JsonStr>{"Data" :[{"PlantCode":"301610","ProductionLine":"TEST22","PlanDate":"2019-01-31","PlanJob":"190001","RecipeIdent":"510","RecipeName":"510 CHICKEN","RecipeDate":"2019-01-18", "PlanWeight":"12000","TotalBatch":"3"}]}</JsonStr>   </ProductionPlan> </soap:Body></soap:Envelope>'
        
         };
-        text2='1'
+        send(bodyResponse.events[0].source.userId)
         request(options, function (error, response, cb) {
           if (error) throw new Error(error);
          
            console.log(cb);
-           text2='2'+ text2
+           send(bodyResponse.events[0].source.userId)
         });
         
         console.log(cb);
-        text2='3'+ text2
+        send(bodyResponse.events[0].source.userId)
       }
-     
+      send(bodyResponse.events[0].source.userId)
       module.exports = {
         
         getTestSoap
-      
+        
       }
-     
-
-
-    }
+      send(bodyResponse.events[0].source.userId)
+  }
     function send(id)  {
 
         let headers = {
