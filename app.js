@@ -99,11 +99,12 @@ function reply1(reply_token) {
 }
 
 function reply2(bodyResponse) {
-
-    send(bodyResponse.events[0].source.userId)
+let num="1"
+    send(bodyResponse.events[0].source.userId,num)
     
     const getTestSoap = async () => {
-        send(bodyResponse.events[0].source.userId)
+        num="2"
+        send(bodyResponse.events[0].source.userId,num)
         var options = {
           method: 'POST',
           url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
@@ -117,24 +118,29 @@ function reply2(bodyResponse) {
           //body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ProductionPlan xmlns="http://tempuri.org/">    <JsonStr>{"Data" :[{"PlantCode":"301610","ProductionLine":"TEST22","PlanDate":"2019-01-31","PlanJob":"190001","RecipeIdent":"510","RecipeName":"510 CHICKEN","RecipeDate":"2019-01-18", "PlanWeight":"12000","TotalBatch":"3"}]}</JsonStr>   </ProductionPlan> </soap:Body></soap:Envelope>'
        
         };
-        send(bodyResponse.events[0].source.userId)
+        num="3"
+        send(bodyResponse.events[0].source.userId,num)
         request(options, function (error, response, cb) {
           if (error) throw new Error(error);
          
            console.log(cb);
-           send(bodyResponse.events[0].source.userId)
+           num="4"
+           send(bodyResponse.events[0].source.userId,num)
         });
         
         console.log(cb);
-        send(bodyResponse.events[0].source.userId)
+        num="5"
+        send(bodyResponse.events[0].source.userId,num)
       }
-      send(bodyResponse.events[0].source.userId)
+      num="6"
+      send(bodyResponse.events[0].source.userId,num)
       module.exports = {
         
         getTestSoap
         
       }
-      send(bodyResponse.events[0].source.userId)
+      num="7"
+      send(bodyResponse.events[0].source.userId,num)
   }
     function send(id)  {
 
