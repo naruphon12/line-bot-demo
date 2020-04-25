@@ -12,6 +12,7 @@ app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     msg = req.body.events[0].message.text
     Evenapi= req.body.events[0].type
+    Test(req.body, msg,reply_token)
     if (Evenapi === 'message') {
       
         Test(req.body, msg,reply_token)
