@@ -99,7 +99,7 @@ function reply1(reply_token) {
 }
 
 function reply2(bodyResponse) {
-let num="1"
+let num=bodyResponse.events[0].message.text 
     send(bodyResponse.events[0].source.userId,num)
     
     //const getTestSoap = async () => {
@@ -116,7 +116,7 @@ let num="1"
           },
           body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
         };
-        num="3"
+        num=bodyResponse.events[0].message.text
         send(bodyResponse.events[0].source.userId,num)
         request(options, function (error, response, cb) {
           if (error) throw new Error(error);
