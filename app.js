@@ -23,6 +23,12 @@ app.post('/webhook', (req, res) => {
     }
  res.sendStatus(200)
 })
+app.post('/Sendorder', (req, res) => {
+  
+    Sendorder(req.body)
+     
+ res.sendStatus(200)
+})
 app.listen(port)
 function reply(bodyResponse, msg,reply_token) {
     let headers = {
@@ -163,3 +169,25 @@ let num=bodyResponse.events[0].message.text
         });
 
         }
+  function Sendorder(bodyResponse) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
+    }
+    body = JSON.stringify({
+        to: bodyResponse.events[0].source.userId,
+        messages: [{
+            type: "image",
+            originalContentUrl: bodyResponse.events[0].message.text ,
+            previewImageUrl: bodyResponse.events[0].message.text 
+        }]
+    })
+    
+      request.post({
+        url: 'https://api.line.me/v2/bot/message/push',
+        headers: headers,
+        body: body
+    }, (err, res, body) => {
+        console.log('status = ' + res.statusCode);
+    });
+    }
