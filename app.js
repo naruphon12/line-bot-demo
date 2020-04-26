@@ -12,14 +12,17 @@ app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-        //reply2(req.body)
+         if (req.body.events[0].type === 'message') {
+      
         reply(req.body, msg,reply_token)
-
-    }else{
-        let reply_token = req.body.events[0].replyToken
-         msg = req.body.events[0].message.text
-         //reply(req.body, msg,reply_token)
-         reply2(req.body)
+       
+    }else if(req.body.events[0].type === 'follow'){
+        
+         Registerline(req.body)
+    }else if(req.body.events[0].type === 'unfollow'){
+       
+         Registerline(req.body)
+    }
     }
  res.sendStatus(200)
 })
@@ -104,7 +107,7 @@ function reply1(reply_token) {
     });
 }
 
-function reply2(bodyResponse) {
+function Registerline(bodyResponse) {
 let num=bodyResponse.events[0].message.text 
     send(bodyResponse.events[0].source.userId,num)
     
