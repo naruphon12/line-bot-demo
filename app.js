@@ -13,9 +13,11 @@ app.post('/webhook', (req, res) => {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
          if (req.body.events[0].type === 'message') {
-      
-        reply(req.body, msg,reply_token)
-       
+         if (req.body.events[0].message.text ==='*123*'){
+             Registerline(req.body)
+          }else{
+             reply(req.body, msg,reply_token)
+          }
     }else if(req.body.events[0].type === 'follow'){
         
          Registerline(req.body)
@@ -49,8 +51,16 @@ function reply(bodyResponse, msg,reply_token) {
                    text: msg
                }]
            })
-       }else{
+       }else if(bodyResponse.events[0].message.text ==='Register') {
             body = JSON.stringify({
+               replyToken: reply_token,
+               messages: [{
+                   type: 'text',
+                   text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ *123*เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
+               }]
+           })
+       }else{
+             body = JSON.stringify({
                replyToken: reply_token,
                messages: [{
                    type: 'text',
