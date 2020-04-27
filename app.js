@@ -124,44 +124,35 @@ function reply1(reply_token) {
 function Registerline(bodyResponse,reply_token) {
 let num="1"
     send(reply_token,num)
-    
-    //const getTestSoap = async () => {
-        num="2"
-        send(reply_token,num)
+    try {
         var options = {
-          method: 'POST',
-          url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
-          headers:
-          {
-            soapaction: 'http://tempuri.org/registerline',
-            host: 'vm-feeduat',
-            'content-type': 'text/xml; charset=utf-8'
-          },
-          body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
-        };
-        num=bodyResponse.events[0].message.text
-        send(reply_token,num)
-        request(options, function (error, response, cb) {
-          if (error) throw new Error(error);
-         
-           console.log(cb);
-           num="4"+ cb
-           send(reply_token.userId,num)
-        });
-        
-        console.log(cb);
-        num="5"
-        send(reply_token,num)
-      //}
-      num="6"
-      send(reply_token,num)
-      module.exports = {
-        
-        getTestSoap
-        
+            method: 'POST',
+            url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
+            headers:
+            {
+              soapaction: 'http://tempuri.org/registerline',
+              host: 'vm-feeduat',
+              'content-type': 'text/xml; charset=utf-8'
+            },
+            body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+          };
+          request(options, function (error, response, cb) {
+            if (error) throw new Error(error);
+           
+             console.log(cb);
+             
+          });
       }
-      num="7"
-      send(reply_token,num)
+      catch (e) {
+        console.log(e);
+       
+        send(reply_token.userId,e)
+      }
+      finally {
+      
+        send(reply_token.userId,e)
+      }
+      
   }
     function send(reply_token,num)  {
 
