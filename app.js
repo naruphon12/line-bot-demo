@@ -13,7 +13,9 @@ app.post('/webhook', (req, res) => {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
     if (req.body.events[0].type === 'message') {
-            findsubstr(req.body.events[0].message.text,reply_token)
+            substring=req.body.events[0].message.text
+            substring=substring.substr(0, 5); 
+           //substring=findsubstr(req.body.events[0].message.text,reply_token)
          if (substring ==='#123#'){
              Registerline(req.body,reply_token)
           }else{
