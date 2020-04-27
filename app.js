@@ -12,8 +12,8 @@ app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-         if (req.body.events[0].type === 'message') {
-            findsubstr(req.body.events[0].message.text)
+    if (req.body.events[0].type === 'message') {
+            findsubstr(req.body.events[0].message.text,reply_token)
          if (substring.text==='*123*'){
              Registerline(req.body,reply_token)
           }else{
@@ -170,7 +170,7 @@ let num=bodyResponse.events[0].message.text
             replyToken: reply_token,
             messages: [{
                 type: 'text',
-                text: 'สวัสดี'+ num
+                text: 'สวัสดี  '+ num
             }]
         })
         
@@ -205,8 +205,11 @@ let num=bodyResponse.events[0].message.text
         console.log('status = ' + res.statusCode);
     });
     }
-    function findsubstr(str) { 
+    function findsubstr(str,reply_token) { 
+        
       substring = str.substr(0, 5); 
       phonenumber= str.substr(5, 15); 
+      send(reply_token,substring)
+      send(reply_token,phonenumber)
         
     } 
