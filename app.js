@@ -121,12 +121,12 @@ function reply1(reply_token) {
 }
 
 function Registerline(bodyResponse,reply_token) {
-let num=bodyResponse.events[0].message.text 
-    send(reply_token.userId,num)
+let num="1"
+    send(reply_token,num)
     
     //const getTestSoap = async () => {
         num="2"
-        send(reply_token.source.userId,num)
+        send(reply_token,num)
         var options = {
           method: 'POST',
           url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
@@ -150,7 +150,7 @@ let num=bodyResponse.events[0].message.text
         
         console.log(cb);
         num="5"
-        send(reply_token.userId,num)
+        send(reply_token,num)
       //}
       num="6"
       send(reply_token,num)
