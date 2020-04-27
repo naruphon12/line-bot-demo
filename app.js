@@ -14,7 +14,7 @@ app.post('/webhook', (req, res) => {
         msg = req.body.events[0].message.text
     if (req.body.events[0].type === 'message') {
             findsubstr(req.body.events[0].message.text,reply_token)
-         if (substring.text==='*123*'){
+         if (substring ==='#123#'){
              Registerline(req.body,reply_token)
           }else{
              reply(req.body, msg,reply_token)
@@ -57,7 +57,7 @@ function reply(bodyResponse, msg,reply_token) {
                replyToken: reply_token,
                messages: [{
                    type: 'text',
-                   text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ *123*เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
+                   text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ #123#เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
                }]
            })
        }else{
@@ -210,6 +210,7 @@ let num=bodyResponse.events[0].message.text
       substring = str.substr(0, 5); 
       phonenumber= str.substr(5, 15); 
       send(reply_token,substring)
+      
       send(reply_token,phonenumber)
         
     } 
