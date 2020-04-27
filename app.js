@@ -6,20 +6,17 @@ const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 let msg
-
+let text2
 
 app.post('/webhook', (req, res) => {
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
-     if (req.body.events[0].type === 'message') {
-      if (req.events[0].message.text ==='*123*'){
-        Registerline(req.body)
-      }else{
+         if (req.body.events[0].type === 'message') {
+      
         reply(req.body, msg,reply_token)
-      }
-        
-   }else if(req.body.events[0].type === 'follow'){
+       
+    }else if(req.body.events[0].type === 'follow'){
         
          Registerline(req.body)
     }else if(req.body.events[0].type === 'unfollow'){
@@ -52,22 +49,14 @@ function reply(bodyResponse, msg,reply_token) {
                    text: msg
                }]
            })
-       }else if (bodyResponse.events[0].message.text ==='Register'){
+       }else{
             body = JSON.stringify({
                replyToken: reply_token,
                messages: [{
                    type: 'text',
-                   text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ *123*เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
+                   text: JSON.stringify(bodyResponse)
                }]
            })
-       }else{
-        body = JSON.stringify({
-            replyToken: reply_token,
-            messages: [{
-                type: 'text',
-                text: JSON.stringify(bodyResponse)
-            }]
-        })
        }
     }else if (type ==='image'){
 
