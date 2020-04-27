@@ -40,65 +40,76 @@ app.post('/Sendorder', (req, res) => {
 })
 app.listen(port)
 function reply(bodyResponse, msg,reply_token) {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
-    }
-    let body
-    let type =bodyResponse.events[0].message.type
-    if (type ==='text'){
-        if (bodyResponse.events[0].message.text ==='สวัสดี'){
+    try {
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
+        }
+        let body
+        let type =bodyResponse.events[0].message.type
+        if (type ==='text'){
+            if (bodyResponse.events[0].message.text ==='สวัสดี'){
+                body = JSON.stringify({
+                   replyToken: reply_token,
+                   messages: [{
+                       type: 'text',
+                       text: msg
+                   }]
+               })
+           }else if(bodyResponse.events[0].message.text ==='Register') {
+                body = JSON.stringify({
+                   replyToken: reply_token,
+                   messages: [{
+                       type: 'text',
+                       text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ #123#เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
+                   }]
+               })
+           }else{
+                 body = JSON.stringify({
+                   replyToken: reply_token,
+                   messages: [{
+                       type: 'text',
+                       text: JSON.stringify(bodyResponse)
+                   }]
+               })
+           }
+        }else if (type ==='image'){
+    
             body = JSON.stringify({
-               replyToken: reply_token,
-               messages: [{
-                   type: 'text',
-                   text: msg
-               }]
-           })
-       }else if(bodyResponse.events[0].message.text ==='Register') {
+                replyToken: reply_token,
+                messages: [{
+                    type: 'text',
+                    text: 'รูป'
+                }]
+            })
+        }else if (type ==='location'){
             body = JSON.stringify({
-               replyToken: reply_token,
-               messages: [{
-                   type: 'text',
-                   text: 'กรุณาใส่หมายเลขโทรศัพท์ เพื่อทำการลงทะเบียน โดยพิมพ์ #123#เบอร์โทรศัพท์ของท่าน เเล้วส่งมาที่ ไลน์'
-               }]
-           })
-       }else{
-             body = JSON.stringify({
-               replyToken: reply_token,
-               messages: [{
-                   type: 'text',
-                   text: JSON.stringify(bodyResponse)
-               }]
-           })
-       }
-    }else if (type ==='image'){
+                replyToken: reply_token,
+                messages: [{
+                    type: 'text',
+                    text: 'location'
+                }]
+            })
+        }
+       
+       
+        request.post({
+            url: 'https://api.line.me/v2/bot/message/reply',
+            headers: headers,
+            body: body
+        }, (err, res, body) => {
+            console.log('status = ' + res.statusCode);
+        });
 
-        body = JSON.stringify({
-            replyToken: reply_token,
-            messages: [{
-                type: 'text',
-                text: 'รูป'
-            }]
-        })
-    }else if (type ==='location'){
-        body = JSON.stringify({
-            replyToken: reply_token,
-            messages: [{
-                type: 'text',
-                text: 'location'
-            }]
-        })
-    }
+      }
+      catch (e) {
+        console.log(e);
+        send(reply_token,e)
+      }
+      finally {
+        
+      }
    
-   
-    request.post({
-        url: 'https://api.line.me/v2/bot/message/reply',
-        headers: headers,
-        body: body
-    }, (err, res, body) => {
-        console.log('status = ' + res.statusCode);
-    });
 }
 function reply1(reply_token) {
     let headers = {
@@ -146,13 +157,13 @@ let num="1"
       catch (e) {
         console.log(e);
        
-        send(reply_token.userId,e)
+        send(reply_token,e)
       }
       finally {
       
-        send(reply_token.userId,e)
+        send(reply_token,e)
       }
-      
+      send(reply_token,e)
   }
     function send(reply_token,num)  {
 
