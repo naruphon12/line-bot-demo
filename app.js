@@ -5,20 +5,30 @@ const app = express()
 const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-let msg
-var phonenumber
-var substring
+let msg=''
+var phonenumber=''
+var substring=''
 app.post('/webhook', (req, res) => {
+    msg=''
+    substring=''
+    substring=''
     if (req.method === 'POST') {
         let reply_token = req.body.events[0].replyToken
         msg = req.body.events[0].message.text
     if (req.body.events[0].type === 'message') {
-            substring=req.body.events[0].message.text
-            substring=substring.substr(0, 5); 
-           //substring=findsubstr(req.body.events[0].message.text,reply_token)
+
+        var str = req.body.events[0].message.text;
+        var numstr = str.length;
+             if (numstr===15){
+                substring=req.body.events[0].message.text
+                phonenumber=req.body.events[0].message.text
+                phonenumber=substring.substr(5, 15); 
+                substring=substring.substr(0, 5); 
+              }
+    
          if (substring ==='#123#'){
              substring=''
-             Registerline(req.body,reply_token)
+             Registerline(req.body,reply_token,phonenumber)
           }else{
              reply(req.body, msg,reply_token)
           }
@@ -132,11 +142,11 @@ function reply1(reply_token) {
     });
 }
 
-function Registerline(bodyResponse,reply_token) {
+function Registerline(bodyResponse,reply_token,phonenumber) {
 let num="เข้า try"
 var err=""
     try {
-        send(reply_token,num)
+        send(reply_token,phonenumber)
         var options = {
             method: 'POST',
             url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
@@ -146,7 +156,7 @@ var err=""
               host: 'vm-feeduat',
               'content-type': 'text/xml; charset=utf-8'
             },
-            body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"1111111111","Phone_No":"0882219724","Email":"naruphon.boo","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
+            body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"'+bodyResponse.events[0].source.userId+'","Phone_No":"'+phonenumber+'","Email":"","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
           };
           request(options, function (error, response, cb) {
             if (error) throw new Error(error);
@@ -166,6 +176,7 @@ var err=""
       }
       send(reply_token,err)
   }
+  
     function send(reply_token,num)  {
 
         let headers = {
@@ -191,7 +202,7 @@ var err=""
         }
   function Sendorder(bodyResponse) {
       
-      try {
+    try {
       let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
@@ -221,15 +232,14 @@ var err=""
     finally {
  
     }
-
+    
     }
     
 function findsubstr(str,reply_token) { 
-        
       substring = str.substr(0, 5); 
       phonenumber= str.substr(5, 15); 
       send(reply_token,substring)
       
       send(reply_token,phonenumber)
-        
+   
     } 
