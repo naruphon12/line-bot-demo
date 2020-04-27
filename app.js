@@ -133,8 +133,8 @@ function reply1(reply_token) {
 }
 
 function Registerline(bodyResponse,reply_token) {
-let num="1"
-   
+let num="เข้า try"
+var err=""
     try {
         send(reply_token,num)
         var options = {
@@ -157,14 +157,14 @@ let num="1"
       }
       catch (e) {
         console.log(e);
-       
-        send(reply_token,e)
+       err=e
+        send(reply_token,err)
       }
       finally {
       
-        send(reply_token,e)
+        send(reply_token,err)
       }
-      send(reply_token,e)
+      send(reply_token,err)
   }
     function send(reply_token,num)  {
 
@@ -190,7 +190,9 @@ let num="1"
 
         }
   function Sendorder(bodyResponse) {
-    let headers = {
+      
+      try {
+      let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sKJLbqM9qS/wDlLuitbNMKhGeJ7zN1mkrLk8RIkiZsvifG051efF/iCtHT4fMHA2jMnStRYUMOKU+bY+yzZ3CTfOUDH+ULXQCeOYTkMsSLOQv+d67caQWLI1sp/Opr40w3SdgJQfLKqwpkABjTjtpQdB04t89/1O/w1cDnyilFU='
     }
@@ -211,7 +213,18 @@ let num="1"
         console.log('status = ' + res.statusCode);
     });
     }
-    function findsubstr(str,reply_token) { 
+    catch (e) {
+ 
+    console.log(e);
+  
+    }
+    finally {
+ 
+    }
+
+    }
+    
+function findsubstr(str,reply_token) { 
         
       substring = str.substr(0, 5); 
       phonenumber= str.substr(5, 15); 
