@@ -134,8 +134,9 @@ function reply1(reply_token) {
 
 function Registerline(bodyResponse,reply_token) {
 let num="1"
-    send(reply_token,num)
+   
     try {
+        send(reply_token,num)
         var options = {
             method: 'POST',
             url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
