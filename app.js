@@ -160,13 +160,13 @@ var err=""
             },
             body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"'+bodyResponse.events[0].source.userId+'","Phone_No":"'+phonenumber+'","Email":"","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
           };
-          request(options, function (error, response, cb) {
+         const requ= request(options, function (error, response, cb) {
             if (error) throw new Error(error);
             num=num +"เข้า ฟังชั่น " +phonenumber
              console.log(cb);
              
           });
-         num=num +" หลุด ฟังชั่น " +phonenumber
+         num=num +" หลุด ฟังชั่น " +phonenumber+" & "+ requ
       }
       catch (e) {
         console.log(e);
