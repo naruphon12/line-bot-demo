@@ -143,10 +143,12 @@ function reply1(reply_token) {
 }
 
 function Registerline(bodyResponse,reply_token,phonenumber) {
-let num="เข้า try"
+let num=""
+ num="เข้า try 1 เบอร์ " +phonenumber
 var err=""
     try {
-        send(reply_token,phonenumber)
+        num="เข้า try 2 เบอร์ " +phonenumber
+        
         var options = {
             method: 'POST',
             url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
@@ -167,14 +169,14 @@ var err=""
       }
       catch (e) {
         console.log(e);
-       err=e
-        send(reply_token,err)
+       num="เข้า try 3 error " +e
+       
       }
       finally {
-      
-        send(reply_token,err)
+      num="เข้า try 5 เบอร์ " 
+        
       }
-      send(reply_token,err)
+      send(reply_token,num)
   }
   
     function send(reply_token,num)  {
