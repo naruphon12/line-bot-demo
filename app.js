@@ -148,8 +148,7 @@ let num=""
 var err=""
     try {
         num=num +"เข้า try 2 เบอร์ " +phonenumber
-        
-        var options = {
+         var options = {
             method: 'POST',
             url: 'http://vm-feeduat/FeedLineBot/WebService.asmx',
             headers:
@@ -160,12 +159,32 @@ var err=""
             },
             body: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body> <registerline xmlns="http://tempuri.org/">     <JsonStr>{"Data":[{"User_ID":"'+bodyResponse.events[0].source.userId+'","Phone_No":"'+phonenumber+'","Email":"","Nameline":"ball"}]}</JsonStr>   </registerline></soap:Body></soap:Envelope>'
           };
-         const requ= request(options, function (error, response, cb) {
-            if (error) throw new Error(error);
-            num=num +"เข้า ฟังชั่น " +phonenumber
-             console.log(cb);
-             
+          var req = request(options, function(res) {
+            num=num +"เข้า ฟังชั่น1 " +phonenumber
+            var msg = '';
+          
+            res.setEncoding('utf8');
+            res.on('data', function(chunk) {
+              msg += chunk;
+              num=num +"เข้า ฟังชั่น2 " +phonenumber +"-"+ msg
+            });
+            res.on('end', function() {
+                num=num +"เข้า ฟังชั่น3 " +phonenumber +"-"+ msg
+              console.log(JSON.parse(msg));
+            });
           });
+          
+          req.write(data);
+          req.end();
+
+         //var requ =request(options, function (error, response, cb) {
+          //  if (error) throw new Error(error);
+          //  num=num +"เข้า ฟังชั่น " +phonenumber
+          //   console.log(cb);
+             
+          //});
+
+         
          num=num +" หลุด ฟังชั่น " +phonenumber+" & "+ requ
       }
       catch (e) {
