@@ -147,7 +147,7 @@ let num=""
  num="เข้า try 1 เบอร์ " +phonenumber
 var err=""
     try {
-        num="เข้า try 2 เบอร์ " +phonenumber
+        num=num +"เข้า try 2 เบอร์ " +phonenumber
         
         var options = {
             method: 'POST',
@@ -162,18 +162,20 @@ var err=""
           };
           request(options, function (error, response, cb) {
             if (error) throw new Error(error);
-           
+            num=num +"เข้า ฟังชั่น " +phonenumber
              console.log(cb);
              
           });
+         num=num +" หลุด ฟังชั่น " +phonenumber
       }
       catch (e) {
         console.log(e);
-       num="เข้า try 3 error " +e
+          err=e
+       num=num +"เข้า try 3 error " + err
        
       }
       finally {
-      num="เข้า try 5 เบอร์ " 
+      num=num +"เข้า try 4 เบอร์ " 
         
       }
       send(reply_token,num)
